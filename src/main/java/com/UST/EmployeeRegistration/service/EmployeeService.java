@@ -34,21 +34,22 @@ public class EmployeeService {
 	public Employee getEmployeeByID(int id) {
 		return repo.findById(id).orElse(null);
 	}
-	public Employee updateEmployee(Employee employee) {
-		Employee oldemp=null;
-		Optional<Employee> optionalemployee=repo.findById(employee.getId());
-		if(optionalemployee.isPresent()) {
-			oldemp=optionalemployee.get();
-			oldemp.setEmpname(employee.getEmpname());
+	public Employee updateEmployee(int id,Employee employee) {
+		Employee oldemp = null;
+		Optional<Employee> optionalemployee = repo.findById(employee.getId());
+		if (optionalemployee.isPresent()) {
+			oldemp = optionalemployee.get();
+//			oldemp.setEmpname(employee.getEmpname());
 			oldemp.setAddress(employee.getAddress());
 			oldemp.setLocation(employee.getLocation());
 			repo.save(oldemp);
-			
-		}
-		else {
+
+		} else {
 			return new Employee();
 		}
+//	employee.setId(id);
 		return oldemp;
+		//return repo.save(employee);
 	}
 	public String deleteEmployeeById(int id) {
 		repo.deleteById(id);
